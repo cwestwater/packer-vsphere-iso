@@ -43,8 +43,7 @@ vm_cdrom_remove = true
 build_repo = "https://github.com/cwestwater/packer-vsphere-iso"
 vm_convert_template = false
 winrm_username = "Administrator"
-# Use environment variables or pass with build command
-# winrm_password = ""
+# winrm_password = "VMware1!"
 
 # Provisioner Settings
 powershell_scripts = [
