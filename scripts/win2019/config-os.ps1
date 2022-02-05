@@ -8,8 +8,8 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\ServerManager" -Name "DoNotPopW
 
 # Enable RDP Connections
 Write-Host "Enable RDP Connections"
-Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name fDenyTSConnections -Type DWord -Value 0
-Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name fDenyTSConnections -Type DWord -Value 0 | Out-Null
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop" | Out-Null
 
 # Add Logoff icon to Desktop
 Write-Host "Add Logoff icon to Public Desktop"
@@ -24,11 +24,11 @@ $shortcut.Save()
 
 # Create C:\Temp
 Write-Host "Create C:\Temp"
-New-Item -Path C:\Temp -ItemType Directory
+New-Item -Path C:\Temp -ItemType Directory | Out-Null
 
 # Disable VMware Tools System Tray Icon
 Write-Host "Disable VMware Tools icon in System Tray"
-Set-ItemProperty -Path 'HKLM:\SOFTWARE\VMware, Inc.\VMware Tools' -Name 'ShowTray' -Value 0
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\VMware, Inc.\VMware Tools' -Name 'ShowTray' -Value 0 | Out-Null
 
 # Enable Firewall
 Write-Host "Enable Windows Firewall"
@@ -36,4 +36,4 @@ netsh Advfirewall set allprofiles state on
 
 # Clear Event Logs
 Write-Host "Clear Event Logs"
-Get-EventLog -LogName * | ForEach-Object { Clear-EventLog -LogName $_.Log } -Verbose
+Get-EventLog -LogName * | ForEach-Object { Clear-EventLog -LogName $_.Log } -Verbose | Out-Null
