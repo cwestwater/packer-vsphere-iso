@@ -40,7 +40,7 @@ vmtools_iso_file = "VMware-tools-windows-11.3.5-18557794.iso"
 vm_cdrom_remove = true
 
 # Build Settings
-build_repo = "https://github.com/cwestwater/packer/tree/main/build/win2019"
+build_repo = "https://github.com/cwestwater/packer-vsphere-iso"
 vm_convert_template = false
 winrm_username = "Administrator"
 # Use environment variables or pass with build command
