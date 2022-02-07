@@ -95,7 +95,7 @@ vmtools_iso_path = ""
 
 Look in the `variables.pkr.hcl` file for details on each variable.
 
-I have placed an example variables value file called [example.pkrvar.hcl](,,/build/example.pkrvar.hcl) the the top level of the `build` folder with the values filled out for a fictitious vCenter environment so you can see how they can be completed.
+I have placed an example variables value file called [example.pkrvar.hcl](build/example.pkrvar.hcl) the the top level of the `build` folder with the values filled out for a fictitious vCenter environment so you can see how they can be completed.
 
 The build of the VM is defined in the `win*.pkr.hcl` files. The file is split into the 'sections':
 
