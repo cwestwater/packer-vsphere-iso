@@ -1,5 +1,5 @@
 # vCenter credentials
-Use environment variables or pass with build command
+# Use environment variables or pass with build command
 vcenter_username = "administrator@vsphere.local"
 vcenter_password = "VMware1!"
 
@@ -44,7 +44,7 @@ build_repo = "https://github.com/cwestwater/packer-vsphere-iso"
 vm_convert_template = false
 winrm_username = "Administrator"
 # Use environment variables or pass with build command
-# winrm_password = "VMware1!"
+winrm_password = "VMware1!"
 
 # Provisioner Settings
 powershell_scripts = [
