@@ -41,9 +41,9 @@ packer {
 
 Packer should be downloaded from the [Packer Downloads](https://www.packer.io/downloads) page and installed appropriately. See the [Install Packer](https://learn.hashicorp.com/tutorials/packer/get-started-install-cli) tutorial.
 
-## autounattend.xml Files
+## autounattend.xml Boot Files
 
-The `autounnatend.xml` files are located in the `bootfiles` folder.
+The `autounattend.xml` files are located in the `bootfiles` folder.
 
 These files are used to perform initial boot of the OS and perform such tasks as partition the disk, set regional options, select the OS version, etc. These are best edited using the [Windows System Image Manager](https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/wsim/windows-system-image-manager-technical-reference) which is part of [Windows ADK](https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install).
 
@@ -95,7 +95,7 @@ vmtools_iso_path = ""
 
 Look in the `variables.pkr.hcl` file for details on each variable.
 
-I have placed an example variables value file called [example.pkrvar.hcl](example.pkrvar.hcl) the the top level of the `build` folder with the values filled out for a fictitious vCenter environment so you can see how they can be completed.
+I have placed an example variables value file called [example.pkrvar.hcl](,,/build/example.pkrvar.hcl) the the top level of the `build` folder with the values filled out for a fictitious vCenter environment so you can see how they can be completed.
 
 The build of the VM is defined in the `win*.pkr.hcl` files. The file is split into the 'sections':
 
