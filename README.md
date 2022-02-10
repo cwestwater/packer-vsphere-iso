@@ -143,6 +143,17 @@ Each of these commands will build all four OS versions. If you want to target a 
 packer build -force -var-file win2022.pkrvar.hcl -only "Windows Server 2022.vsphere-iso.win2022dc" .
 ```
 
+## OS Customisation
+
+Once the VMs have completed initial setup and Packer can connect using WinRM, four PowerShell scripts are run to perform the following:
+
+- Disable TLS 1.0 and 1.1
+- Removes various features
+- Disables services Microsoft recommends
+- Performs some general OS customisations
+
+These scripts are found in the `scripts` folder.
+
 ## A Note on Credentials
 
 The credentials needed to successfully build are as follows:
@@ -153,7 +164,7 @@ The credentials needed to successfully build are as follows:
 
 Important - the WinRM username and password should match the Local Administrator account username and password as this is what Packer uses to connect to the VM for customisation. In the files in this repo I have added the local Administrator account password in clear text. Please use WSIM to hide the password.
 
-It is important not to store any credentials in any of the files so they cannot be leaked. Please use environment variables or pass them at the command line. For example to pass vCenter creds and the WinRM password at the command line for Windows Server 2022 you could run:
+It is important not to store any credentials in any of the files so they cannot be leaked. Please use environment variables or pass them at the command line. For example to pass vCenter credentials and the WinRM password at the command line for Windows Server 2022 you could run:
 
 ```dosbatch
 packer build -force -var-file win2022.pkrvar.hcl -var "vcenter_username=administrator@vsphere.local" -var "vcenter_password=VMware1!" -var "winrm_password=VMware1!" .
