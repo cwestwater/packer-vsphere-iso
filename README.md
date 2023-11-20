@@ -21,18 +21,18 @@ The version of Packer, the [vsphere-iso](https://www.packer.io/plugins/builders/
 ```terraform
 packer {
 
-    required_version = ">= 1.7.9"
+    required_version = ">= 1.9.4"
 
     required_plugins {
         vsphere = {
-            version = ">= v1.0.2"
+            version = ">= v1.2.2"
             source = "github.com/hashicorp/vsphere"
         }
     }
 
     required_plugins{
         windows-update = {
-            version =">= 0.14.0"
+            version =">= 0.14.3"
             source = "github.com/rgl/windows-update"
         }
     }
@@ -77,7 +77,7 @@ These files are written using [HashiCorp HCL2](https://www.packer.io/guides/hcl)
 - win*.pkrvar.hcl - the values for all the variables defined above
 - win*.pkr.hcl - the build definition for the OS
 
-To be able to run the builds in your environment you need to fill in the missing values in the `win*.pkrvar.hcl` files:
+To be able to run the builds in your environment you need to fill in the missing values in the `win*.auto.pkrvars.hcl` files:
 
 ```terraform
 vcenter_username = ""
@@ -115,24 +115,24 @@ Each of the Operating System `win*.pkr.hcl` files has four options:
 
 ## How to Run
 
-Once all variables have a value in the `win*.pkrvar.hcl` file browse to the OS `build` folder you want to run. Run the following command:
+Once all variables have a value in the `win*.auto.pkrvars.hcl` file browse to the OS `build` folder you want to run. Run the following command:
 
 Windows Server 2022:
 
 ```dosbatch
-packer build -force -var-file win2022.pkrvar.hcl .
+packer build -force .
 ```
 
 Windows Server 2019:
 
 ```dosbatch
-packer build -force -var-file win2019.pkrvar.hcl .
+packer build -force .
 ```
 
 Windows Server 2016:
 
 ```dosbatch
-packer build -force -var-file win2016.pkrvar.hcl .
+packer build -force -var-file .
 ```
 
 Note the `.` at the end of the command. This makes Packer process all the files in the folder.
@@ -140,7 +140,7 @@ Note the `.` at the end of the command. This makes Packer process all the files 
 Each of these commands will build all four OS versions. If you want to target a particular OS version you can use the following command (Windows Server 2022 Standard as an example):
 
 ```dosbatch
-packer build -force -var-file win2022.pkrvar.hcl -only "Windows Server 2022.vsphere-iso.win2022dc" .
+packer build -force -only "Windows Server 2022.vsphere-iso.win2022dc" .
 ```
 
 ## OS Customisation
@@ -167,11 +167,11 @@ Important - the WinRM username and password should match the Local Administrator
 It is important not to store any credentials in any of the files so they cannot be leaked. Please use environment variables or pass them at the command line. For example to pass vCenter credentials and the WinRM password at the command line for Windows Server 2022 you could run:
 
 ```dosbatch
-packer build -force -var-file win2022.pkrvar.hcl -var "vcenter_username=administrator@vsphere.local" -var "vcenter_password=VMware1!" -var "winrm_password=VMware1!" .
+packer build -force -var "vcenter_username=administrator@vsphere.local" -var "vcenter_password=VMware1!" -var "winrm_password=VMware1!" .
 ```
 
 Please see [Template User Variables](https://www.packer.io/docs/templates/legacy_json_templates/user-variables) in the Packer documentation for more details.
 
 ## Maintenance
 
-Once you have filled out the variable values in the relevant `win*.pkrvar.hcl` files and placed the ISOs in the datastore and folder as defined in that file, the only real maintenance you need to do is update VMware tools. This is accomplished by downloading the latest ISO as detailed the [VMware Tools](#VMware-Tools) section. You then update the variable value `var.vmtools_iso_file` with the downloaded ISO filename.
+Once you have filled out the variable values in the relevant `win*.auto.pkrvars.hcl` files and placed the ISOs in the datastore and folder as defined in that file, the only real maintenance you need to do is update VMware tools. This is accomplished by downloading the latest ISO as detailed the [VMware Tools](#VMware-Tools) section. You then update the variable value `var.vmtools_iso_file` with the downloaded ISO filename.
