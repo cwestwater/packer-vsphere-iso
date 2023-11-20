@@ -132,7 +132,7 @@ packer build -force .
 Windows Server 2016:
 
 ```dosbatch
-packer build -force -var-file .
+packer build -force .
 ```
 
 Note the `.` at the end of the command. This makes Packer process all the files in the folder.
