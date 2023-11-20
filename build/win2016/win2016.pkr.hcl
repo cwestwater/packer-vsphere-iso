@@ -1,17 +1,17 @@
 packer {
 
-    required_version = ">= 1.8.5"
+    required_version = ">= 1.9.4"
 
     required_plugins {
         vsphere = {
-            version = ">= v1.1.1"
+            version = ">= v1.2.2"
             source = "github.com/hashicorp/vsphere"
         }
     }
 
     required_plugins{
         windows-update = {
-            version =">= 0.14.1"
+            version =">= 0.14.3"
             source = "github.com/rgl/windows-update"
         }
     }
