@@ -13,7 +13,6 @@ dnf -y remove linux-firmware
 dnf -y autoremove
 
 echo "Remove previous kernels that preserved for rollbacks"
-dnf -y remove -y $(dnf repoquery --installonly --latest-limit=-1 -q)
 dnf -y clean all  --enablerepo=\*;
 
 echo "truncate any logs that have built up during the install"
@@ -34,3 +33,8 @@ truncate -s 0 /etc/machine-id
 echo "Clear the history so our install commands aren't there"
 rm -f /root/.wget-hsts
 export HISTSIZE=0
+
+echo "Remove Subscription"
+subscription-manager unregister
+subscription-manager remove --all
+subscription-manager clean
