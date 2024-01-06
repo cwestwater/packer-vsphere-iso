@@ -25,7 +25,7 @@ source "vmware-iso" "rhel89" {
   folder              = "templates"
 
   # VM Hardware Configuration
-  vm_name       = "rhel89"
+  vm_name       = "rhel89tmplt"
   guest_os_type = "rhel8_64Guest"
   firmware      = "bios"
   vm_version    = "19"
@@ -57,7 +57,7 @@ source "vmware-iso" "rhel89" {
   communicator        = "ssh"
   ssh_port            = 22
   ssh_username        = "root"
-  ssh_password        = "D0wnT0wn"
+  ssh_password        = "VMware1!"
   ssh_timeout         = "30m"
   shutdown_command    = "echo 'packer'|sudo systemctl poweroff"
   shutdown_timeout    = "10m"
@@ -70,4 +70,19 @@ build {
   sources = [
     "source.vmware-iso.rhel89"
   ]
+
+  provisioner "shell" {
+  execute_command = "echo 'packer'|{{ .Vars }} sudo -S -E bash '{{ .Path }}'"
+  scripts         = ["scripts/register.sh"]
+  }
+
+  provisioner "shell" {
+  execute_command = "echo 'packer'|{{ .Vars }} sudo -S -E bash '{{ .Path }}'"
+  inline          = ["dnf -y update"]
+  }
+
+  provisioner "shell" {
+  execute_command = "echo 'packer'|{{ .Vars }} sudo -S -E bash '{{ .Path }}'"
+  scripts         = ["scripts/cleanup.sh"]
+  }
 }
